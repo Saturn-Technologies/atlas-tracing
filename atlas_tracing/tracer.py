@@ -1,11 +1,10 @@
-from opentelemetry import trace
+from opentelemetry import propagators, trace
 from opentelemetry.instrumentation.boto import BotoInstrumentor
 from opentelemetry.instrumentation.botocore import BotocoreInstrumentor
 from opentelemetry.instrumentation.fastapi import FastAPIInstrumentor
 from opentelemetry.instrumentation.redis import RedisInstrumentor
 from opentelemetry.instrumentation.requests import RequestsInstrumentor
 from opentelemetry.instrumentation.sqlalchemy import SQLAlchemyInstrumentor
-from opentelemetry.propagators import propagators
 from opentelemetry.sdk.trace import TracerProvider
 
 

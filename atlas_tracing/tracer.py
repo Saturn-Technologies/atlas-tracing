@@ -1,4 +1,4 @@
-from opentelemetry import propagators, trace
+from opentelemetry import trace
 from opentelemetry.instrumentation.boto import BotoInstrumentor
 from opentelemetry.instrumentation.botocore import BotocoreInstrumentor
 from opentelemetry.instrumentation.fastapi import FastAPIInstrumentor
@@ -19,14 +19,11 @@ class Atlas:
         if datadog_agent:
             from opentelemetry.exporter.datadog import DatadogExportSpanProcessor, \
                 DatadogSpanExporter
-            from opentelemetry.exporter.datadog.propagator import DatadogFormat
             exporter = DatadogSpanExporter(agent_url=datadog_agent, service=service)
 
             span_processor = DatadogExportSpanProcessor(exporter)
             trace.get_tracer_provider().add_span_processor(span_processor)
 
-            # Optional: use Datadog format for propagation in distributed traces
-            propagators.set_global_httptextformat(DatadogFormat())
         FastAPIInstrumentor.instrument_app(app)
         RequestsInstrumentor().instrument()
         BotocoreInstrumentor().instrument(tracer_provider=trace.get_tracer_provider())

@@ -15,6 +15,7 @@ opentelemetry-instrumentation-redis = "^0.16b1"
 opentelemetry-instrumentation-fastapi = "^0.16b1"
 opentelemetry-instrumentation-botocore = "^0.16b1"
 opentelemetry-instrumentation-boto = "^0.16b1"
+opentelemetry-exporter-datadog = "^0.16b1"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"

@@ -2,10 +2,9 @@
 An OpenTelemetry Toolbox for Python Applications
 
 ## Supported Frameworks
-- [ ] ASGI
-- [ ] Requests
-- [ ] Logging
-- [ ] Redis
-- [ ] Boto3
+- [X] ASGI
+- [X] Requests
+- [X] Redis
+- [X] Boto3
 - [ ] aioboto3
-- [ ] SQLALchemy
+- [X] SQLALchemy

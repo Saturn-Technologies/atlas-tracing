@@ -16,7 +16,7 @@ class Atlas:
     tracer = None
 
     def __init__(self, app, service='atlas-api', sqlalchemy_engine=None, datadog_agent=None,
-                 span_callback=None, ignored_paths: List[str] = None):
+                 span_callback=None, ignored_paths: List[str] = None, sql_service=None):
         self.app = app
         trace.set_tracer_provider(TracerProvider())
         self.tracer = trace.get_tracer(__name__)
@@ -35,4 +35,6 @@ class Atlas:
         BotoInstrumentor().instrument(tracer_provider=trace.get_tracer_provider())
         RedisInstrumentor().instrument(tracer_provider=trace.get_tracer_provider())
         if sqlalchemy_engine:
-            SQLAlchemyInstrumentor().instrument(engine=sqlalchemy_engine, service=service)
+            sqlalch_service_name = service if not sql_service else sql_service
+            SQLAlchemyInstrumentor().instrument(engine=sqlalchemy_engine,
+                                                service=sqlalch_service_name)

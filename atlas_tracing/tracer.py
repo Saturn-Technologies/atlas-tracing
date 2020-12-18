@@ -1,18 +1,22 @@
+from typing import List
+
 from opentelemetry import trace
 from opentelemetry.instrumentation.boto import BotoInstrumentor
 from opentelemetry.instrumentation.botocore import BotocoreInstrumentor
-from opentelemetry.instrumentation.fastapi import FastAPIInstrumentor
 from opentelemetry.instrumentation.redis import RedisInstrumentor
 from opentelemetry.instrumentation.requests import RequestsInstrumentor
 from opentelemetry.instrumentation.sqlalchemy import SQLAlchemyInstrumentor
 from opentelemetry.sdk.trace import TracerProvider
+
+from atlas_tracing.integrations.fastapi import AtlasFastAPIInstrumentor
 
 
 class Atlas:
     app = None
     tracer = None
 
-    def __init__(self, app, service='atlas-api', sqlalchemy_engine=None, datadog_agent=None):
+    def __init__(self, app, service='atlas-api', sqlalchemy_engine=None, datadog_agent=None,
+                 span_callback=None, ignored_paths: List[str] = None):
         self.app = app
         trace.set_tracer_provider(TracerProvider())
         self.tracer = trace.get_tracer(__name__)
@@ -24,7 +28,8 @@ class Atlas:
             span_processor = DatadogExportSpanProcessor(exporter)
             trace.get_tracer_provider().add_span_processor(span_processor)
 
-        FastAPIInstrumentor.instrument_app(app)
+        AtlasFastAPIInstrumentor.instrument_app(app, span_callback=span_callback,
+                                                ignored_paths=ignored_paths)
         RequestsInstrumentor().instrument()
         BotocoreInstrumentor().instrument(tracer_provider=trace.get_tracer_provider())
         BotoInstrumentor().instrument(tracer_provider=trace.get_tracer_provider())

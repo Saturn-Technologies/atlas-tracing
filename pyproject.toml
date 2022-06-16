@@ -1,21 +1,21 @@
 [tool.poetry]
 name = "atlas-tracing"
-version = "0.1.0"
+version = "0.2.0"
 description = ""
 authors = ["Guilherme Scaranse <guilherme@joinsaturn.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.7"
-opentelemetry-api = "^0.16b1"
-opentelemetry-sdk = "^0.16b1"
-opentelemetry-instrumentation-asgi = "^0.16b1"
-opentelemetry-instrumentation-sqlalchemy = "^0.16b1"
-opentelemetry-instrumentation-requests = "^0.16b1"
-opentelemetry-instrumentation-redis = "^0.16b1"
-opentelemetry-instrumentation-fastapi = "^0.16b1"
-opentelemetry-instrumentation-botocore = "^0.16b1"
-opentelemetry-instrumentation-boto = "^0.16b1"
-opentelemetry-exporter-datadog = "^0.16b1"
+opentelemetry-api = "^0*"
+opentelemetry-sdk = "^0*"
+opentelemetry-instrumentation-asgi = "^0*"
+opentelemetry-instrumentation-sqlalchemy = "^0*"
+opentelemetry-instrumentation-requests = "^0*"
+opentelemetry-instrumentation-redis = "^0*"
+opentelemetry-instrumentation-fastapi = "^0*"
+opentelemetry-instrumentation-botocore = "^0*"
+opentelemetry-instrumentation-boto = "^0*"
+opentelemetry-exporter-datadog = "^0*"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"

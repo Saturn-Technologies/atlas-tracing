@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "atlas-tracing"
-version = "0.2.0"
+version = "0.2.1"
 description = ""
 authors = ["Guilherme Scaranse <guilherme@joinsaturn.com>"]
 
@@ -16,6 +16,7 @@ opentelemetry-instrumentation-fastapi = "^0*"
 opentelemetry-instrumentation-botocore = "^0*"
 opentelemetry-instrumentation-boto = "^0*"
 opentelemetry-exporter-datadog = "^0*"
+ddtrace = "^0.61"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"

@@ -21,10 +21,11 @@ class Atlas:
         trace.set_tracer_provider(TracerProvider())
         self.tracer = trace.get_tracer(__name__)
         if datadog_agent:
+            from ddtrace.internal.writer import AgentWriter
             from opentelemetry.exporter.datadog import DatadogExportSpanProcessor, \
                 DatadogSpanExporter
             exporter = DatadogSpanExporter(agent_url=datadog_agent, service=service)
-
+            exporter._agent_writer = AgentWriter(datadog_agent)
             span_processor = DatadogExportSpanProcessor(exporter)
             trace.get_tracer_provider().add_span_processor(span_processor)
 
